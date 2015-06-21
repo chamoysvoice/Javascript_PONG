@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <script src="js/main.js"></script>
-</head>
-<body onload="onLoad()">
-    <canvas id="canvas" width="320" height="480">Sorry!</canvas>
-</body>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title></title>
+        <script src="js/main.js"></script>
+        <style>
+            h3, li, ul, canvas {
+                width:inherit;
+            }
+        </style>
+    </head>
+    <body onload="onLoad()" style="background-color:#151515">
+        <div style="width:380px; margin-right:auto; margin-left:auto;background-color:white;align-content: center;">
+
+            <h3>Controls:</h3>
+            <ul>
+                <li>
+                    Right and Left arrows for movement
+                </li>
+                <li>
+                    R Key: for Reset
+                </li>
+            </ul>
+            <canvas id="canvas" width="320" height="480">Sorry!</canvas>
+        </div>
+    </body>
 </html>

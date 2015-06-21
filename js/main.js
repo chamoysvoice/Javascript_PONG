@@ -99,16 +99,15 @@ function onLoad(){
         }
     }
 
-    function mainLogic(){
-        updateBall();
-        updateUpperPanel();
-        updateLowerPanel();
-        updateScore();
+    function specialKeys(){
+        document.onkeydown = function(e){
 
-    }
 
-    function updateUpperPanel(){
-        document.onkeydown = function(e) {
+            if(e.keyCode == 82){
+                startGame();
+            }
+
+
             switch (e.keyCode) {
                 case 37:
                     upperPanel.pos_x -= mainSpeed;
@@ -118,9 +117,16 @@ function onLoad(){
                     break;
             }
         };
-
-
     }
+
+    function mainLogic(){
+        updateBall();
+        updateLowerPanel();
+        updateScore();
+        specialKeys();
+    }
+
+
 
     function drawScore(s_player1, s_player2){
         context.fillStyle = "#cccccc";
@@ -162,11 +168,27 @@ function onLoad(){
 
     }
 
+    function startScore(){
+        game.score_player1 = 0;
+        game.score_player2 = 0;
+    }
+
     function startGame(){
         startBall();
         startPanels();
+        startScore();
+        drawBackground();
+        drawUpperPanel(upperPanel.pos_x);
+        drawDownPanel(lowerPanel.pos_x);
+        drawBall(ball.pos_x,ball.pos_y);
+        drawScore(game.score_player1, game.score_player2);
     }
 
     startGame();
-    window.setInterval(pongGame, refreshRate);
+
+    document.onkeydown = function(e){
+        if(e.keyCode == 32){
+            window.setInterval(pongGame, refreshRate);
+        }
+    }
 }
