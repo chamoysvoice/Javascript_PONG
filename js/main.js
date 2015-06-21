@@ -29,7 +29,6 @@ function onLoad(){
     var context = canvas.getContext("2d");
 
     function drawBackground(){
-
         context.fillStyle = '#333333';
         context.fillRect(0,0, canvas.width, canvas.height);
 
@@ -40,16 +39,25 @@ function onLoad(){
         context.stroke();
     }
 
+    function drawBorder(){
+        context.strokeStyle = "#cccccc";
+        context.beginPath();
+        context.moveTo(1,1);
+        context.lineTo(canvas.width-1, 1);
+        context.lineTo(canvas.width-1, canvas.height-1);
+        context.lineTo(1, canvas.height-1);
+        context.lineTo(1,1);
+        context.stroke();
+    }
+
     function drawUpperPanel(label_x){
         context.fillStyle = "#cccccc";
         context.fillRect(label_x, 10, 100, 10);
-
     }
 
     function drawDownPanel(label_x){
         context.fillStyle = "#cccccc";
         context.fillRect(label_x, canvas.height - 20, 100, 10 );
-
     }
 
     function drawBall(label_x, label_y){
@@ -78,6 +86,8 @@ function onLoad(){
         ball.pos_x += ball.speed_x;
         ball.pos_y += ball.speed_y;
     }
+
+
 
     function updateLowerPanel(){
         if(ball.pos_x - 30 < lowerPanel.pos_x){
@@ -126,7 +136,11 @@ function onLoad(){
         specialKeys();
     }
 
-
+    function drawInitialComment(){
+        context.fillStyle = "#cccccc";
+        context.font = "20px Georgia";
+        context.fillText("Press Space to Start.", 60, 200);
+    }
 
     function drawScore(s_player1, s_player2){
         context.fillStyle = "#cccccc";
@@ -139,6 +153,7 @@ function onLoad(){
         mainLogic();
 
         drawBackground();
+        drawBorder();
         drawUpperPanel(upperPanel.pos_x);
         drawDownPanel(lowerPanel.pos_x);
         drawBall(ball.pos_x,ball.pos_y);
@@ -178,15 +193,17 @@ function onLoad(){
         startPanels();
         startScore();
         drawBackground();
+        drawBorder();
         drawUpperPanel(upperPanel.pos_x);
         drawDownPanel(lowerPanel.pos_x);
         drawBall(ball.pos_x,ball.pos_y);
         drawScore(game.score_player1, game.score_player2);
+        drawInitialComment();
     }
 
     startGame();
 
-    document.onkeydown = function(e){
+    document.onkeydown  = function(e){
         if(e.keyCode == 32){
             window.setInterval(pongGame, refreshRate);
         }
